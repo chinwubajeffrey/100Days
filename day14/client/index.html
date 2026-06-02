@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <button onclick="getData()">Get</button>
+
+      <button onclick="createText()">Post</button>
+
+      <button onclick="getSecret()">Secret</button>
+
+      <pre id="reply"></pre>
+    </div>
+  </body>
+
+  <script>
+    let reply = document.getElementById("reply");
+    async function getData() {
+      const response = await fetch("http://localhost:3000/api/data");
+      const originalRes = await response.json();
+      reply.innerHTML = JSON.stringify(originalRes, null, 2);
+    }
+
+    async function createText() {
+      try {
+        const fetchedText = await fetch("http://localhost:3000/api/echo", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: "some message" }),
+        });
+
+        const mainText = await fetchedText.json();
+        reply.innerHTML = JSON.stringify(mainText, null, 2);
+      } catch (err) {
+        reply.innerHTML = JSON.stringify({ text: "There was an error", err });
+      }
+    }
+
+    async function getSecret() {
+      const rawSecret = await fetch("http://localhost:3000/api/secret", {
+        headers: { authorization: "Bearer test-token-123" },
+      });
+      const secret = await rawSecret.json();
+      reply.innerHTML = JSON.stringify(secret, null, 2);
+    }
+  </script>
+</html>
