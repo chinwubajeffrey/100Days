@@ -13,9 +13,10 @@
 //   console.log(coin + "Let's see");
 
 //   try {
-//     res = await fetch(
+//     const res = await fetch(
 //       `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`,
 //     );
+//
 //     const data = await res.json();
 //     if (!data[coin]) {
 //       price.innerHTML = "Nigga search for an existing coin";

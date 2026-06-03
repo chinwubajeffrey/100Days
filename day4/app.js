@@ -4,7 +4,6 @@ const errMsg = document.getElementById("errMsg");
 
 function checkWeather() {
   let city = input.value;
-
   fetchWeather(city);
 }
 
