@@ -1,5 +1,5 @@
 const express = require("express");
-const projects = require("../data/store");
+const { projects } = require("../data/store");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -30,7 +30,7 @@ router.get("/:id", (req, res, next) => {
 router.post("/", (req, res, next) => {
   const { status, budget, client, stage } = req.body;
 
-  if (!clients || !budget) {
+  if (!client || !budget) {
     const err = {
       status: 400,
       message: "Add a budget and client in your request",

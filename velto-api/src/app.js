@@ -1,4 +1,4 @@
-require("dotenv").config;
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const logger = require("./middleware/logger");
@@ -14,7 +14,10 @@ app.use(
 );
 app.use(express.json());
 
-app.use(logger());
+app.use(logger);
 app.use("/projects", projectsRouter);
 
-app.use(errorHandler());
+app.use(errorHandler);
+app.listen(PORT, () => console.log(`App is running on ${PORT}`));
+
+module.exports = app;
